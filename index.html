@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Farmacia Escuela Venezuela — Confirmación RRHH</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap');
+  :root{
+    --navy:#001E62; --blue:#418FDE; --ink:#0d1b2a;
+    --orange:#E8821E; --orange-bg:#FFF1E0; --orange-line:#F4A23C;
+    --azul:#2E6FD6; --azul-bg:#E3EEFC; --azul-line:#5B92E5;
+    --rojo:#C0392B; --rojo-bg:#FBE3E1; --rojo-line:#E07065;
+    --gris:#8A8F98; --gris-bg:#ECEDEF; --gris-line:#B7BCC4;
+    --green:#1E7B34; --green-bg:#E6F4EA; --red:#C0392B;
+    --bg:#F4F6FB; --card:#fff; --border:#E2E7F0; --muted:#6B7587;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);font-size:14px}
+  .wrap{max-width:1340px;margin:0 auto;padding:24px 20px 90px}
+  header{background:linear-gradient(135deg,var(--navy) 0%,#0a2f8a 100%);color:#fff;border-radius:18px;padding:28px 32px;position:relative;overflow:hidden;box-shadow:0 12px 30px -10px rgba(0,30,98,.4)}
+  header::after{content:"";position:absolute;right:-40px;top:-40px;width:200px;height:200px;background:radial-gradient(circle,rgba(65,143,222,.35),transparent 70%);border-radius:50%}
+  header h1{font-family:'Sora',sans-serif;font-weight:800;font-size:26px;letter-spacing:-.5px}
+  header p{opacity:.9;margin-top:6px;font-size:14px;max-width:680px}
+  .guide{background:var(--card);border:1px solid var(--border);border-radius:16px;margin-top:18px;overflow:hidden}
+  .guide-head{display:flex;align-items:center;gap:10px;padding:16px 22px;cursor:pointer;user-select:none;font-family:'Sora',sans-serif;font-weight:700;color:var(--navy)}
+  .guide-head .chev{margin-left:auto;transition:.2s;opacity:.5}
+  .guide.closed .chev{transform:rotate(-90deg)} .guide.closed .guide-body{display:none}
+  .guide-body{padding:4px 24px 22px;border-top:1px solid var(--border)}
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:16px}
+  .step{display:flex;gap:12px;align-items:flex-start}
+  .step .num{flex:none;width:30px;height:30px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-weight:700;font-size:14px}
+  .step .tx{font-size:13px;line-height:1.45}.step .tx b{color:var(--navy)}
+  .legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:18px;padding-top:16px;border-top:1px dashed var(--border);font-size:12.5px;font-weight:600}
+  .legend span{display:inline-flex;align-items:center;gap:6px;color:var(--muted)}
+  .legend .d{width:11px;height:11px;border-radius:50%}
+  .stats{display:flex;gap:14px;margin:20px 0;flex-wrap:wrap}
+  .stat{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px 20px;flex:1;min-width:120px}
+  .stat.hero{background:linear-gradient(135deg,#FFF6EC,#FFFFFF);border-color:var(--orange-line)}
+  .stat.total{background:linear-gradient(135deg,#EEF3FF,#FFFFFF);border-color:var(--blue)}
+  .stat.dark{background:var(--navy);border-color:var(--navy)}
+  .stat.dark .n{color:#fff} .stat.dark .l{color:#C5D2EC}
+  .stat .n{font-family:'Sora',sans-serif;font-weight:800;font-size:30px;line-height:1}
+  .stat .l{font-size:12px;color:var(--muted);margin-top:6px;font-weight:600;text-transform:uppercase;letter-spacing:.4px}
+  .stat .dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:6px}
+  .progress{height:6px;background:#EEF2FA;border-radius:99px;margin-top:10px;overflow:hidden}
+  .progress i{display:block;height:100%;background:var(--green);border-radius:99px;transition:.3s}
+  .controls{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+  .search{flex:1;min-width:200px;position:relative}
+  .search input{width:100%;padding:12px 16px 12px 40px;border:1px solid var(--border);border-radius:12px;font-family:inherit;font-size:14px;background:var(--card)}
+  .search svg{position:absolute;left:13px;top:12px;opacity:.4}
+  .selwrap{position:relative;min-width:170px}
+  .selwrap label{position:absolute;top:-7px;left:12px;background:var(--card);padding:0 6px;font-size:10px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.5px}
+  select{width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:12px;font-family:inherit;font-size:14px;background:var(--card);font-weight:600;color:var(--ink);cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236B7587' stroke-width='3'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:34px}
+  select:focus{outline:none;border-color:var(--blue)}
+  .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+  .chip{padding:9px 15px;border:1px solid var(--border);background:var(--card);border-radius:999px;cursor:pointer;font-weight:600;font-size:13px;transition:.15s;user-select:none}
+  .chip:hover{border-color:var(--blue)} .chip.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .area-group{margin-bottom:14px;background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+  .area-head{padding:14px 20px;background:#FAFBFE;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;cursor:pointer;user-select:none}
+  .area-head h3{font-family:'Sora',sans-serif;font-size:15px;font-weight:700;color:var(--navy);white-space:nowrap}
+  .area-head .zonas{font-size:12px;color:var(--muted);font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .area-head .badge{font-size:12px;color:var(--muted);font-weight:600;background:#EEF2FA;padding:3px 10px;border-radius:999px;white-space:nowrap;margin-left:auto}
+  .area-head .chev{transition:.2s;opacity:.5}
+  .area-group.closed .chev{transform:rotate(-90deg)} .area-group.closed .rows{display:none}
+  table{width:100%;border-collapse:collapse}
+  th{text-align:center;font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);padding:10px 14px;border-bottom:1px solid var(--border);font-weight:700}
+  td{padding:11px 14px;border-bottom:1px solid #F0F3F8;vertical-align:middle}
+  tr:last-child td{border-bottom:none}
+  .t-name{font-weight:700;font-size:14px}
+  .t-loc{font-size:11.5px;color:var(--muted);margin-top:2px}
+  .t-zona{display:inline-block;font-size:10.5px;color:var(--blue);font-weight:700;background:#EEF4FC;padding:1px 7px;border-radius:6px;margin-top:3px}
+  .t-code{font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .pill{display:inline-flex;align-items:center;gap:5px;padding:4px 11px;border-radius:999px;font-size:12px;font-weight:700;white-space:nowrap}
+  .pill .d{width:8px;height:8px;border-radius:50%}
+  .p-activa{background:var(--orange-bg);color:var(--orange)} .p-activa .d{background:var(--orange-line)}
+  .p-proxima{background:var(--azul-bg);color:var(--azul)} .p-proxima .d{background:var(--azul-line)}
+  .p-a_inactivar{background:var(--rojo-bg);color:var(--rojo)} .p-a_inactivar .d{background:var(--rojo-line)}
+  .p-inactiva{background:var(--gris-bg);color:var(--gris)} .p-inactiva .d{background:var(--gris-line)}
+  .p-ninguna{background:#F4F6FB;color:#9AA3B2;border:1px dashed #D5DBE6} .p-ninguna .d{background:#C5CCD8}
+  .total{font-family:'Sora',sans-serif;font-weight:800;font-size:13px;font-variant-numeric:tabular-nums;padding:3px 9px;border-radius:8px;color:#fff;display:inline-block;min-width:58px;text-align:center}
+  .total.green{background:var(--green)} .total.red{background:var(--red)} .total.na{background:#D5DBE6;color:#7A8294}
+  .actions{display:flex;gap:6px;flex-wrap:wrap}
+  .act{padding:7px 13px;border-radius:9px;border:1.5px solid var(--border);background:#fff;cursor:pointer;font-size:12.5px;font-weight:700;transition:.12s;white-space:nowrap;color:#4a5468}
+  .act:hover{transform:translateY(-1px)}
+  .act.a-confirmar:hover,.act.a-confirmar.sel{background:var(--green-bg);border-color:var(--green);color:var(--green)}
+  .act.a-activar:hover,.act.a-activar.sel{background:var(--orange-bg);border-color:var(--orange-line);color:var(--orange)}
+  .act.a-inactivar:hover,.act.a-inactivar.sel{background:var(--rojo-bg);border-color:var(--rojo-line);color:var(--rojo)}
+  .act.sel{box-shadow:0 0 0 2px rgba(0,30,98,.06)}
+  .coment{width:100%;min-width:150px;padding:8px 11px;border:1px solid var(--border);border-radius:9px;font-family:inherit;font-size:12.5px;background:#FCFDFF}
+  .coment:focus{outline:none;border-color:var(--blue)}
+  .coment.req{border-color:var(--rojo);background:#FFF6F5}
+  .coment.req::placeholder{color:var(--rojo);font-weight:600}
+  .row-activa{background:linear-gradient(90deg,var(--orange-bg),transparent 55%)}
+  .row-proxima{background:linear-gradient(90deg,var(--azul-bg),transparent 55%)}
+  .row-a_inactivar{background:linear-gradient(90deg,var(--rojo-bg),transparent 55%)}
+  .row-inactiva{background:linear-gradient(90deg,var(--gris-bg),transparent 55%)}
+  tr.confirmada td{box-shadow:inset 3px 0 0 var(--green)}
+  tr.marcada-activar td{box-shadow:inset 3px 0 0 var(--orange-line)}
+  tr.marcada-inact td{box-shadow:inset 3px 0 0 var(--rojo)}
+  .savebar{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--border);padding:14px 20px;display:flex;align-items:center;gap:16px;justify-content:center;box-shadow:0 -6px 20px -8px rgba(0,0,0,.1);z-index:50}
+  .savebar .info{font-size:13px;color:var(--muted)}
+  .btn{padding:11px 22px;border-radius:11px;border:none;font-family:'Sora',sans-serif;font-weight:700;font-size:14px;cursor:pointer;transition:.15s}
+  .btn-ghost{background:#fff;border:1px solid var(--border);color:var(--ink)}
+  .saved-flash{color:var(--green);font-weight:700;font-size:13px;opacity:0;transition:.3s} .saved-flash.show{opacity:1}
+  .empty{text-align:center;padding:50px;color:var(--muted)}
+  @media(max-width:820px){.t-loc{display:none}th.hide-m,td.hide-m{display:none}.actions{flex-direction:column}}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Farmacia Escuela · Venezuela</h1>
+    <p>Herramienta de confirmación para coordinadores de RRHH. Revisa el estado de cada Farmacia Escuela, confirma si estás de acuerdo o márcala para inactivar, y deja tus comentarios. Todo se guarda automáticamente.</p>
+  </header>
+
+  <div class="guide" id="guide">
+    <div class="guide-head" onclick="document.getElementById('guide').classList.toggle('closed')">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+      ¿Cómo usar esta herramienta?
+      <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+    </div>
+    <div class="guide-body">
+      <div class="steps">
+        <div class="step"><div class="num">1</div><div class="tx">Ubica tu <b>área</b> o busca tu <b>tienda</b> con los filtros.</div></div>
+        <div class="step"><div class="num">2</div><div class="tx">Revisa el <b>Estado actual</b> de cada Farmacia Escuela.</div></div>
+        <div class="step"><div class="num">3</div><div class="tx">En <b>Acción</b>: <b>Confirmar</b> si estás de acuerdo, <b>Activar</b> (justificando en Comentarios), o <b>Inactivar</b>.</div></div>
+        <div class="step"><div class="num">4</div><div class="tx">Escribe observaciones en <b>Comentarios</b>.</div></div>
+        <div class="step"><div class="num">5</div><div class="tx">Al terminar, usa <b>Exportar CSV</b> para enviar tu revisión.</div></div>
+      </div>
+      <div class="legend">
+        <span><span class="d" style="background:var(--orange-line)"></span>🟠 Activa</span>
+        <span><span class="d" style="background:var(--azul-line)"></span>🔵 Próximamente</span>
+        <span><span class="d" style="background:var(--rojo-line)"></span>🔴 A inactivar</span>
+        <span><span class="d" style="background:var(--gris-line)"></span>⚫ Inactiva</span>
+        <span><span class="d" style="background:#C5CCD8"></span>No son Farmacia Escuela</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats" id="stats"></div>
+
+  <div class="controls">
+    <div class="search">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <input id="search" placeholder="Buscar por código o ubicación...">
+    </div>
+    <div class="selwrap"><label>Área</label><select id="areaSel"></select></div>
+    <div class="selwrap"><label>Tienda</label><select id="tiendaSel"></select></div>
+  </div>
+
+  <div class="filters" id="filters">
+    <span class="chip on" data-f="all">Todas</span>
+    <span class="chip" data-f="fe">Solo Farmacia Escuela</span>
+    <span class="chip" data-f="activa">🟠 Activas</span>
+    <span class="chip" data-f="proxima">🔵 Próximas</span>
+    <span class="chip" data-f="a_inactivar">🔴 A inactivar</span>
+    <span class="chip" data-f="inactiva">⚫ Inactivas</span>
+    <span class="chip" data-f="ninguna">No son FE</span>
+    <span class="chip" data-f="confirmada">✓ Confirmadas</span>
+    <span class="chip" data-f="mayor100">📈 % ≥ 100%</span>
+    <span class="chip" data-f="menor100">📉 % &lt; 100%</span>
+    <span class="chip" data-f="pendiente">⏳ Sin revisar</span>
+  </div>
+
+  <div id="list"></div>
+</div>
+
+<div class="savebar">
+  <span class="saved-flash" id="flash">✓ Guardado</span>
+  <span class="info">Los cambios se guardan automáticamente</span>
+  <button class="btn btn-ghost" id="export">Exportar CSV</button>
+  <button class="btn btn-ghost" id="reset">Limpiar mi revisión</button>
+</div>
+
+<script>
+let ORIGINAL = [{"region": "1", "area": "1", "zona": "Caracas", "codigo": "157", "tienda": "ALBITA", "ubicacion": "SANTA EDUVIGIS", "estado": "ninguna", "total": 106.5}, {"region": "1", "area": "1", "zona": "Caracas", "codigo": "140", "tienda": "AMBAR", "ubicacion": "CENTRO SAN IGNACIO", "estado": "ninguna", "total": 119.8}, {"region": "1", "area": "1", "zona": "Caracas", "codigo": "2156", "tienda": "CARLOTA", "ubicacion": "LA CARLOTA", "estado": "ninguna", "total": 108.3}, {"region": "1", "area": "1", "zona": "Caracas", "codigo": "193", "tienda": "CUARZO", "ubicacion": "C.C MILLENIUM NIVEL COMERCIO", "estado": "ninguna", "total": 107.4}, {"region": "1", "area": "1", "zona": "Caracas", "codigo": "141", "tienda": "INDIGO", "ubicacion": "C.C. SAMBIL - NIVEL FERIA", "estado": "ninguna", "total": 111.2}, {"region": "1", "area": "1", "zona": "Caracas", "codigo": "142", "tienda": "LUZMAR", "ubicacion": "CHACAO - AV. FCO. DE MIRANDA", "estado": "activa", "total": 113.0}, {"region": "1", "area": "1", "zona": "Caracas", "codigo": "119", "tienda": "MELANIE", "ubicacion": "LOS PALOS GRANDES - 3RA TRANSVERSAL CON AV. ANDRES BELLO", "estado": "ninguna", "total": 117.5}, {"region": "1", "area": "1", "zona": "Caracas", "codigo": "154", "tienda": "MÚCURA", "ubicacion": "SANTA EDUVIGIS", "estado": "inactiva", "total": 100.6}, {"region": "1", "area": "1", "zona": "Caracas", "codigo": "148", "tienda": "NACAR", "ubicacion": "LA FLORIDA", "estado": "ninguna", "total": 114.6}, {"region": "1", "area": "1", "zona": "Caracas", "codigo": "145", "tienda": "RUBI", "ubicacion": "C.C. SAMBIL - NIVEL AUTOPISTA", "estado": "ninguna", "total": 110.1}, {"region": "1", "area": "1", "zona": "Caracas", "codigo": "125", "tienda": "TEO", "ubicacion": "CCCT - NIVEL FERIA", "estado": "activa", "total": 120.4}, {"region": "1", "area": "1", "zona": "Caracas", "codigo": "113", "tienda": "TOBOGAN", "ubicacion": "ALTAMIRA - 4TA AVENIDA", "estado": "activa", "total": 115.6}, {"region": "1", "area": "1", "zona": "Caracas", "codigo": "126", "tienda": "LA CASTELLANA", "ubicacion": "LA CASTELLANA", "estado": "ninguna", "total": 119.2}, {"region": "1", "area": "2", "zona": "Caracas", "codigo": "136", "tienda": "ANTINEA", "ubicacion": "PARQUE CENTRAL", "estado": "ninguna", "total": 110.3}, {"region": "1", "area": "2", "zona": "Caracas", "codigo": "100", "tienda": "ARCO", "ubicacion": "CENTRO PLAZA PAEZ", "estado": "ninguna", "total": 109.1}, {"region": "1", "area": "2", "zona": "Caracas", "codigo": "138", "tienda": "CLAVELINAS", "ubicacion": "CANDELARIA CENTER", "estado": "ninguna", "total": 106.6}, {"region": "1", "area": "2", "zona": "Caracas", "codigo": "139", "tienda": "CONGRESO", "ubicacion": "EL CONGRESO", "estado": "ninguna", "total": 102.0}, {"region": "1", "area": "2", "zona": "Caracas", "codigo": "134", "tienda": "CUARTEL BARALT", "ubicacion": "ESQUINA EL CUARTEL", "estado": "a_inactivar", "total": 117.9}, {"region": "1", "area": "2", "zona": "Caracas", "codigo": "165", "tienda": "ELEANOR", "ubicacion": "AV. JOSÉ ANTONIO PAEZ", "estado": "activa", "total": 104.6}, {"region": "1", "area": "2", "zona": "Caracas", "codigo": "101", "tienda": "EL AVILA", "ubicacion": "C.C. SAMBIL LA CANDELARIA (NIVEL AB)", "estado": "a_inactivar", "total": 101.1}, {"region": "1", "area": "2", "zona": "Caracas", "codigo": "149", "tienda": "METROCENTER", "ubicacion": "C.C. METROCENTER -\n NIVEL MEZZANINA", "estado": "ninguna", "total": 105.0}, {"region": "1", "area": "2", "zona": "Caracas", "codigo": "129", "tienda": "OLIVO", "ubicacion": "C.C. METROCENTER - PB", "estado": "ninguna", "total": 114.0}, {"region": "1", "area": "2", "zona": "Caracas", "codigo": "132", "tienda": "PIRINEOS", "ubicacion": "AV. UNIVERSIDAD", "estado": "ninguna", "total": 122.5}, {"region": "1", "area": "2", "zona": "Caracas", "codigo": "102", "tienda": "SAMBIL LA CANDELARIA", "ubicacion": "C.C. SAMBIL LA CANDELARIA", "estado": "activa", "total": 119.9}, {"region": "1", "area": "2", "zona": "Caracas", "codigo": "110", "tienda": "PUNCERES", "ubicacion": "FILAS DE MARICHE", "estado": "ninguna", "total": 120.9}, {"region": "1", "area": "2", "zona": "Caracas", "codigo": "137", "tienda": "ROBLE", "ubicacion": "CENTRO SIMÓN BOLÍVAR", "estado": "ninguna", "total": 106.1}, {"region": "1", "area": "2", "zona": "Caracas", "codigo": "143", "tienda": "TOPACIO", "ubicacion": "SAN BERNARDINO - AV. GALIPÁN", "estado": "inactiva", "total": 106.6}, {"region": "1", "area": "2", "zona": "Caracas", "codigo": "131", "tienda": "VENECIA", "ubicacion": "AV. URDANETA - ESQ. DE ANIMAS", "estado": "ninguna", "total": 112.0}, {"region": "1", "area": "3", "zona": "Caracas", "codigo": "130", "tienda": "BARROCA", "ubicacion": "C.C. LA VILLA", "estado": "a_inactivar", "total": 110.6}, {"region": "1", "area": "3", "zona": "Caracas", "codigo": "153", "tienda": "BELLA VISTA", "ubicacion": "VISTA ALEGRE - AV. USLAR", "estado": "ninguna", "total": 109.5}, {"region": "1", "area": "3", "zona": "Caracas", "codigo": "104", "tienda": "CARICUAO", "ubicacion": "CARICUAO", "estado": "ninguna", "total": 115.7}, {"region": "1", "area": "3", "zona": "Caracas", "codigo": "108", "tienda": "MADRE CABRINI", "ubicacion": "ANTIMANO", "estado": "ninguna", "total": 103.3}, {"region": "1", "area": "3", "zona": "Caracas", "codigo": "2105", "tienda": "BOULEVART DE CATIA", "ubicacion": "BOULEVARD DE CATIA", "estado": "ninguna", "total": 108.7}, {"region": "1", "area": "3", "zona": "Caracas", "codigo": "205", "tienda": "MARIA ANTONIETA", "ubicacion": "NAIGUATÁ CARABALLEDA", "estado": "a_inactivar", "total": 99.2}, {"region": "1", "area": "3", "zona": "Caracas", "codigo": "204", "tienda": "MARINERA", "ubicacion": "CATIA LA MAR - AV. EL EJERCITO", "estado": "ninguna", "total": 112.6}, {"region": "1", "area": "3", "zona": "Caracas", "codigo": "158", "tienda": "MATERNIDAD", "ubicacion": "AV. SAN MARTÍN", "estado": "activa", "total": 107.2}, {"region": "1", "area": "3", "zona": "Caracas", "codigo": "109", "tienda": "NUEVA CARACAS", "ubicacion": "CATIA", "estado": "ninguna", "total": 102.4}, {"region": "1", "area": "3", "zona": "Caracas", "codigo": "159", "tienda": "PLAZA CARICUAO", "ubicacion": "PLAZA CARICUAO", "estado": "ninguna", "total": 102.9}, {"region": "1", "area": "3", "zona": "Caracas", "codigo": "161", "tienda": "RAFAEL TEODORO", "ubicacion": "AV. LA ARMADA, CATIA LA MAR", "estado": "a_inactivar", "total": 109.3}, {"region": "1", "area": "3", "zona": "Caracas", "codigo": "206", "tienda": "REGULO", "ubicacion": "AV. LA PLAYA, CARABALLEDA", "estado": "proxima", "total": 108.8}, {"region": "1", "area": "3", "zona": "Caracas", "codigo": "207", "tienda": "PLAYA GRANDE", "ubicacion": "PLAYA GRANDE, LA GUAIRA", "estado": "proxima", "total": 113.6}, {"region": "1", "area": "3", "zona": "Caracas", "codigo": "2208", "tienda": "MAIQUETIA", "ubicacion": "CARABALLEDA. LA GUAIRA", "estado": "ninguna", "total": 121.2}, {"region": "1", "area": "3", "zona": "Caracas", "codigo": "133", "tienda": "ZONA FRANCA", "ubicacion": "AV. SAN MARTÍN", "estado": "proxima", "total": 99.5}, {"region": "3", "area": "4", "zona": "Caracas", "codigo": "124", "tienda": "AUTANA", "ubicacion": "AV. ORINOCO LAS MERCEDES", "estado": "activa", "total": 106.6}, {"region": "3", "area": "4", "zona": "Altos Mirandinos", "codigo": "211", "tienda": "ESMERALDA", "ubicacion": "CUA", "estado": "activa", "total": 101.1}, {"region": "3", "area": "4", "zona": "Altos Mirandinos", "codigo": "160", "tienda": "EXPRESO", "ubicacion": "C.C. EXPRESO", "estado": "activa", "total": 109.6}, {"region": "3", "area": "4", "zona": "Altos Mirandinos", "codigo": "155", "tienda": "GRACIELA", "ubicacion": "LA LAGUNITA", "estado": "inactiva", "total": 108.3}, {"region": "3", "area": "4", "zona": "Altos Mirandinos", "codigo": "107", "tienda": "IRENE", "ubicacion": "C.C. PLAZA LAS AMERICAS", "estado": "ninguna", "total": 89.5}, {"region": "3", "area": "4", "zona": "Altos Mirandinos", "codigo": "166", "tienda": "JOSE MIGUEL", "ubicacion": "LA UNION - EL HATILLO", "estado": "activa", "total": 113.7}, {"region": "3", "area": "4", "zona": "Altos Mirandinos", "codigo": "121", "tienda": "MANANTIAL", "ubicacion": "LA BOYERA", "estado": "ninguna", "total": 102.2}, {"region": "3", "area": "4", "zona": "Altos Mirandinos", "codigo": "181", "tienda": "MONICA", "ubicacion": "C.C. PARQUE CERRO VERDE", "estado": "ninguna", "total": 118.2}, {"region": "3", "area": "4", "zona": "Altos Mirandinos", "codigo": "210", "tienda": "OFELIA", "ubicacion": "CHARALLAVE", "estado": "activa", "total": 119.0}, {"region": "3", "area": "4", "zona": "Altos Mirandinos", "codigo": "146", "tienda": "TEPUY", "ubicacion": "AV RIO DE JANEIRO - LAS MERCEDES", "estado": "ninguna", "total": 103.0}, {"region": "3", "area": "4", "zona": "Altos Mirandinos", "codigo": "112", "tienda": "TEREPAIMA", "ubicacion": "LA TRINIDAD", "estado": "inactiva", "total": 101.1}, {"region": "3", "area": "4", "zona": "Altos Mirandinos", "codigo": "182", "tienda": "PEDRO LUIS", "ubicacion": "LOMAS DEL SOL", "estado": "proxima", "total": 107.1}, {"region": "3", "area": "4", "zona": "Altos Mirandinos", "codigo": "118", "tienda": "CHUAO", "ubicacion": "CHUAO", "estado": "proxima", "total": 109.7}, {"region": "3", "area": "4", "zona": "Altos Mirandinos", "codigo": "112", "tienda": "ESTACION SUR", "ubicacion": "CHARALLAVE", "estado": "ninguna", "total": null}, {"region": "3", "area": "4", "zona": "Altos Mirandinos", "codigo": "144", "tienda": "ZAFIRO", "ubicacion": "COLINAS DE TAMANACO - VIZCAYA", "estado": "a_inactivar", "total": 103.7}, {"region": "3", "area": "5", "zona": "Caracas", "codigo": "2190", "tienda": "CAMINITO", "ubicacion": "GUATIRE", "estado": "ninguna", "total": 97.7}, {"region": "3", "area": "5", "zona": "Guarenas", "codigo": "116", "tienda": "CORINA", "ubicacion": "LA URBINA - AV. PRINCIPAL", "estado": "activa", "total": 110.5}, {"region": "3", "area": "5", "zona": "Guatire", "codigo": "199", "tienda": "GRANATE", "ubicacion": "AV. INTERCOMUNAL GUARENAS-GUATIRE", "estado": "activa", "total": 109.1}, {"region": "3", "area": "5", "zona": "Guatire", "codigo": "180", "tienda": "JENNIFER", "ubicacion": "HIGUEROTE", "estado": "activa", "total": 109.1}, {"region": "3", "area": "5", "zona": "Guatire", "codigo": "164", "tienda": "JUAN BAUTISTA", "ubicacion": "FILAS DE MARICHE", "estado": "ninguna", "total": 103.5}, {"region": "3", "area": "5", "zona": "Guatire", "codigo": "152", "tienda": "LA JOYA", "ubicacion": "C.C. XPRES MACARACUAY", "estado": "activa", "total": 105.8}, {"region": "3", "area": "5", "zona": "Guatire", "codigo": "191", "tienda": "LIDER", "ubicacion": "C.C. LÍDER", "estado": "ninguna", "total": 110.6}, {"region": "3", "area": "5", "zona": "Guatire", "codigo": "115", "tienda": "MIRENA", "ubicacion": "LA URBINA", "estado": "ninguna", "total": 117.7}, {"region": "3", "area": "5", "zona": "Guatire", "codigo": "150", "tienda": "MONTANAL", "ubicacion": "PETARE - AV. FRANCISCO DE MIRANDA", "estado": "ninguna", "total": 106.9}, {"region": "3", "area": "5", "zona": "Guatire", "codigo": "187", "tienda": "NELLYS", "ubicacion": "GUATIRE", "estado": "activa", "total": 113.0}, {"region": "3", "area": "5", "zona": "Guatire", "codigo": "196", "tienda": "OCUMITO", "ubicacion": "TERRAZAS DEL AVILA", "estado": "ninguna", "total": 108.0}, {"region": "3", "area": "5", "zona": "Guatire", "codigo": "192", "tienda": "SAN PASTOR", "ubicacion": "C.C. UNICENTRO EL MARQUES", "estado": "ninguna", "total": 111.3}, {"region": "3", "area": "5", "zona": "Guatire", "codigo": "111", "tienda": "SETENTA", "ubicacion": "C.C. MACARACUAY PLAZA", "estado": "ninguna", "total": 109.7}, {"region": "3", "area": "5", "zona": "Guatire", "codigo": "198", "tienda": "TURQUESA", "ubicacion": "C.C. GUATIRE PLAZA", "estado": "ninguna", "total": 104.6}, {"region": "3", "area": "5", "zona": "Guatire", "codigo": "197", "tienda": "VERTIENTE", "ubicacion": "GUARENAS - CALLE COMERCIO", "estado": "ninguna", "total": 111.5}, {"region": "1", "area": "6", "zona": "Maracay", "codigo": "505", "tienda": "ADELMIRA", "ubicacion": "CALABOZO", "estado": "activa", "total": 114.6}, {"region": "1", "area": "6", "zona": "La Victoria", "codigo": "272", "tienda": "AMATISTA", "ubicacion": "TURMERO", "estado": "ninguna", "total": 106.8}, {"region": "1", "area": "6", "zona": "La Victoria", "codigo": "2276", "tienda": "ARAGUANEY", "ubicacion": "C.C. UNICENTRO MARACAY", "estado": "ninguna", "total": 117.0}, {"region": "1", "area": "6", "zona": "La Victoria", "codigo": "270", "tienda": "CEDRO", "ubicacion": "MARACAY- CALLE 2 C/4TA AV. MANZANA", "estado": "ninguna", "total": 101.9}, {"region": "1", "area": "6", "zona": "La Victoria", "codigo": "269", "tienda": "CRISTAL", "ubicacion": "MARACAY - URB SAN CARLOS", "estado": "ninguna", "total": 111.1}, {"region": "1", "area": "6", "zona": "La Victoria", "codigo": "320", "tienda": "DAYSI", "ubicacion": "MARACAY - CALLE MARIÑO", "estado": "a_inactivar", "total": 113.2}, {"region": "1", "area": "6", "zona": "La Victoria", "codigo": "2507", "tienda": "VALLE DE LA PASCUA", "ubicacion": "VALLE DE LA PASCUA, EDO. GUARICO", "estado": "activa", "total": 118.6}, {"region": "1", "area": "6", "zona": "La Victoria", "codigo": "296", "tienda": "DELTA", "ubicacion": "LA VICTORIA - AV. FRANCISCO LORETO", "estado": "activa", "total": 111.8}, {"region": "1", "area": "6", "zona": "La Victoria", "codigo": "511", "tienda": "LUIS", "ubicacion": "SAN FERNANDO", "estado": "activa", "total": 118.1}, {"region": "1", "area": "6", "zona": "La Victoria", "codigo": "277", "tienda": "GREGORIO", "ubicacion": "MARACAY - AV BERMUDEZ", "estado": "ninguna", "total": 110.2}, {"region": "1", "area": "6", "zona": "La Victoria", "codigo": "504", "tienda": "MIGUEL", "ubicacion": "SAN JUAN DE LOS MORROS", "estado": "activa", "total": 113.8}, {"region": "1", "area": "6", "zona": "La Victoria", "codigo": "271", "tienda": "UMBRAL", "ubicacion": "MARACAY -  AV. PP. LAS DELICIAS", "estado": "ninguna", "total": 103.6}, {"region": "1", "area": "6", "zona": "La Victoria", "codigo": "267", "tienda": "ZULY", "ubicacion": "MARACAY - SC BARRIO SUCRE II", "estado": "activa", "total": 110.3}, {"region": "2", "area": "7", "zona": "Valencia", "codigo": "281", "tienda": "ALPES", "ubicacion": "URB. EL VIÑEDO", "estado": "ninguna", "total": 104.5}, {"region": "2", "area": "7", "zona": "Puerto Cabello", "codigo": "209", "tienda": "BAMBU", "ubicacion": "CENT. SAN DIEGO - URB. CIUDAD MONTEMAYOR", "estado": "activa", "total": 108.6}, {"region": "2", "area": "7", "zona": "Puerto Cabello", "codigo": "273", "tienda": "CAFETAL", "ubicacion": "NAGUANAGUA - AV. UNIVERSIDAD", "estado": "ninguna", "total": 104.4}, {"region": "2", "area": "7", "zona": "Puerto Cabello", "codigo": "289", "tienda": "CIELO", "ubicacion": "NAGUANAGUA - URB. MAÑONGO", "estado": "proxima", "total": 104.0}, {"region": "2", "area": "7", "zona": "Puerto Cabello", "codigo": "282", "tienda": "DANIELA", "ubicacion": "C.C. SAMBIL VALENCIA - NIVEL FERIA", "estado": "ninguna", "total": 106.4}, {"region": "2", "area": "7", "zona": "Puerto Cabello", "codigo": "287", "tienda": "DIAMANTE", "ubicacion": "VALENCIA - URB. LA TRIGALEÑA", "estado": "a_inactivar", "total": 111.0}, {"region": "2", "area": "7", "zona": "Puerto Cabello", "codigo": "275", "tienda": "GERMAN", "ubicacion": "VALENCIA PLAZA DE TOROS", "estado": "a_inactivar", "total": 112.8}, {"region": "2", "area": "7", "zona": "Puerto Cabello", "codigo": "286", "tienda": "GINEBRA", "ubicacion": "VALENCIA - AV. BOLÍVAR NORTE", "estado": "a_inactivar", "total": 107.5}, {"region": "2", "area": "7", "zona": "Puerto Cabello", "codigo": "288", "tienda": "GUATAPARO", "ubicacion": "VALENCIA - URB. LOS MANGOS", "estado": "activa", "total": 112.7}, {"region": "2", "area": "7", "zona": "Puerto Cabello", "codigo": "278", "tienda": "ISABELLA", "ubicacion": "VALENCIA - URB. EL VIÑENO", "estado": "ninguna", "total": 111.8}, {"region": "2", "area": "7", "zona": "Puerto Cabello", "codigo": "279", "tienda": "PERLA", "ubicacion": "AV. INTERCOMUNAL SAN DIEGO", "estado": "ninguna", "total": 108.4}, {"region": "2", "area": "7", "zona": "Puerto Cabello", "codigo": "284", "tienda": "TRINCHERAS", "ubicacion": "NAGUANAGUA- CC LA GRANJA", "estado": "ninguna", "total": 108.0}, {"region": "2", "area": "7", "zona": "Puerto Cabello", "codigo": "2283", "tienda": "LA ISABELICA", "ubicacion": "VALENCIA", "estado": "ninguna", "total": 122.0}, {"region": "2", "area": "7", "zona": "Puerto Cabello", "codigo": "298", "tienda": "YADIRA", "ubicacion": "GUACARA- PARQUE INDUSTRIAL LA FLORESTA", "estado": "activa", "total": 116.6}, {"region": "2", "area": "8", "zona": "Barinas", "codigo": "689", "tienda": "AGATA", "ubicacion": "ARAURE - AV. 13 DE JUNIO", "estado": "a_inactivar", "total": 119.2}, {"region": "2", "area": "8", "zona": "Barinas", "codigo": "690", "tienda": "ARAURE", "ubicacion": "AV. PUNTO VENCEDORES", "estado": "proxima", "total": 109.6}, {"region": "2", "area": "8", "zona": "Barinas", "codigo": "550", "tienda": "ALFA", "ubicacion": "URB. ALTO BARINAS", "estado": "ninguna", "total": 108.7}, {"region": "2", "area": "8", "zona": "Barinas", "codigo": "510", "tienda": "GISELA", "ubicacion": "GUANARE-AV. 23 DE ENERO", "estado": "activa", "total": 117.3}, {"region": "2", "area": "8", "zona": "Barinas", "codigo": "506", "tienda": "MALVINA", "ubicacion": "BARINAS CENTRO", "estado": "a_inactivar", "total": 119.4}, {"region": "2", "area": "8", "zona": "Barinas", "codigo": "521", "tienda": "MEYBY", "ubicacion": "TINAQUILLO", "estado": "activa", "total": 118.0}, {"region": "2", "area": "8", "zona": "Barinas", "codigo": "551", "tienda": "OMEGA", "ubicacion": "BARINAS - AV. CUATRICENTENARIA", "estado": "activa", "total": 116.5}, {"region": "2", "area": "8", "zona": "Barinas", "codigo": "520", "tienda": "SERVANDO", "ubicacion": "SAN CARLOS - AV. CARACAS/ AV. SAN JOSÉ", "estado": "activa", "total": 107.0}, {"region": "2", "area": "8", "zona": "Barinas", "codigo": "694", "tienda": "UNDA", "ubicacion": "GUANARE - AV. UNDA CON CARRERA 12 Y 14", "estado": "a_inactivar", "total": 112.2}, {"region": "2", "area": "9", "zona": "Barquisimeto", "codigo": "311", "tienda": "ACERINA", "ubicacion": "BARQUISIMETO-\n Av. 20 CON AV. MORAN", "estado": "a_inactivar", "total": 112.9}, {"region": "2", "area": "9", "zona": "San Felipe", "codigo": "308", "tienda": "BOSQUE", "ubicacion": "BARQUISIMETO - URB. NUEVA SEGOVIA", "estado": "activa", "total": 111.8}, {"region": "2", "area": "9", "zona": "San Felipe", "codigo": "302", "tienda": "CIENCIA", "ubicacion": "BARQUISIMETO - C.C. LAS TRINITARIAS", "estado": "a_inactivar", "total": 108.5}, {"region": "2", "area": "9", "zona": "San Felipe", "codigo": "313", "tienda": "EL PARQUE", "ubicacion": "BARQUISIMETO - Av Libertador con Vereda 2", "estado": "ninguna", "total": 107.1}, {"region": "2", "area": "9", "zona": "San Felipe", "codigo": "322", "tienda": "ELSIS", "ubicacion": "BARQUISIMETO - URB. SANTA ELENA", "estado": "ninguna", "total": 118.6}, {"region": "2", "area": "9", "zona": "San Felipe", "codigo": "321", "tienda": "ENSO", "ubicacion": "BARQUISIMETO - TARABANA PLAZA", "estado": "ninguna", "total": 101.6}, {"region": "2", "area": "9", "zona": "San Felipe", "codigo": "303", "tienda": "FLORESTA", "ubicacion": "CABUDARE - AV. LIBERTADOR", "estado": "proxima", "total": 111.6}, {"region": "2", "area": "9", "zona": "San Felipe", "codigo": "307", "tienda": "OBELISCO", "ubicacion": "BARQUISIMETO - OBELISCO", "estado": "ninguna", "total": 123.2}, {"region": "2", "area": "9", "zona": "San Felipe", "codigo": "314", "tienda": "JIRAHARA", "ubicacion": "BARQUISIMETO - C.C SAMBIL", "estado": "ninguna", "total": 114.6}, {"region": "2", "area": "9", "zona": "San Felipe", "codigo": "323", "tienda": "MARYCARMEN", "ubicacion": "BARQUISIMETO - C.C. VENEZUELA", "estado": "ninguna", "total": 113.4}, {"region": "2", "area": "9", "zona": "San Felipe", "codigo": "310", "tienda": "AV MORAN", "ubicacion": "BARQUISIMETO- AV MORAN", "estado": "ninguna", "total": 109.8}, {"region": "2", "area": "9", "zona": "San Felipe", "codigo": "2304", "tienda": "ZUBILLAGA HERMANOS", "ubicacion": "BARQUISIMETO- CARORA", "estado": "ninguna", "total": 115.3}, {"region": "2", "area": "9", "zona": "San Felipe", "codigo": "309", "tienda": "ONIX", "ubicacion": "BARQUISIMETO - AV. PEDRO LEON TORRES CON CALLE 54", "estado": "activa", "total": 118.0}, {"region": "2", "area": "10", "zona": "MARACAIBO", "codigo": "675", "tienda": "COSTA LAGO", "ubicacion": "CABIMAS- CALLE 5", "estado": "activa", "total": 105.6}, {"region": "2", "area": "10", "zona": "MARACAIBO", "codigo": "666", "tienda": "COSTA SUR", "ubicacion": "MARACAIBO -VIA A LA CAÑADA DE URDANETA", "estado": "ninguna", "total": 115.3}, {"region": "2", "area": "10", "zona": "MARACAIBO", "codigo": "660", "tienda": "ESQUINA", "ubicacion": "MARACAIBO - AV BELLA VISTA", "estado": "proxima", "total": 119.1}, {"region": "2", "area": "10", "zona": "MARACAIBO", "codigo": "604", "tienda": "FRANCISCO", "ubicacion": "MARACAIBO - LA LIMPIA", "estado": "activa", "total": 117.8}, {"region": "2", "area": "10", "zona": "MARACAIBO", "codigo": "661", "tienda": "FUERZAS ARMADAS", "ubicacion": "MARACAIBO - AV FUERZAS ARMADAS", "estado": "activa", "total": 114.0}, {"region": "2", "area": "10", "zona": "MARACAIBO", "codigo": "665", "tienda": "INDIO MARA", "ubicacion": "MARACAIBO - AV 20 CON CALLE 67", "estado": "ninguna", "total": 105.8}, {"region": "2", "area": "10", "zona": "MARACAIBO", "codigo": "663", "tienda": "LAGOMAR", "ubicacion": "MARACAIBO - C.C. SAMBIL MCBO", "estado": "ninguna", "total": 117.6}, {"region": "2", "area": "10", "zona": "MARACAIBO", "codigo": "605", "tienda": "NERIDA", "ubicacion": "MARACAIBO - CIRCUNVALACION 3", "estado": "activa", "total": 114.2}, {"region": "2", "area": "10", "zona": "MARACAIBO", "codigo": "670", "tienda": "ORO NEGRO", "ubicacion": "CIUDAD OJEDA - CALLE CARDON", "estado": "activa", "total": 105.0}, {"region": "2", "area": "10", "zona": "MARACAIBO", "codigo": "662", "tienda": "TORRE EUROPA", "ubicacion": "AV BELLA VISTA C/CALLE 62", "estado": "ninguna", "total": 106.7}, {"region": "2", "area": "10", "zona": "MARACAIBO", "codigo": "", "tienda": "CIRCUNVALACION 1", "ubicacion": "", "estado": "ninguna", "total": null}, {"region": "2", "area": "10", "zona": "MARACAIBO", "codigo": "", "tienda": "CUMBRES", "ubicacion": "", "estado": "proxima", "total": 121.8}, {"region": "2", "area": "10", "zona": "MARACAIBO", "codigo": "2668", "tienda": "LA VEREDA", "ubicacion": "LA VEREDA", "estado": "ninguna", "total": 122.7}, {"region": "2", "area": "10", "zona": "MARACAIBO", "codigo": "2667", "tienda": "LAS DELICIAS", "ubicacion": "MARACAIBO", "estado": "ninguna", "total": 121.0}, {"region": "2", "area": "10", "zona": "MARACAIBO", "codigo": "669", "tienda": "CECILIO ACOSTA", "ubicacion": "", "estado": "ninguna", "total": 124.4}, {"region": "2", "area": "11", "zona": "Mérida", "codigo": "593", "tienda": "ARELIS", "ubicacion": "SAN CRISTOBAL - AV. 19 DE ABRIL", "estado": "activa", "total": 102.6}, {"region": "2", "area": "11", "zona": "Trujillo", "codigo": "606", "tienda": "ESCALANTE", "ubicacion": "KM 2 CRTA STA BARBARA-VIGIA", "estado": "activa", "total": 113.4}, {"region": "2", "area": "11", "zona": "Trujillo", "codigo": "318", "tienda": "GABRIEL", "ubicacion": "MÉRIDA - URB. LOS CORALES", "estado": "activa", "total": 119.6}, {"region": "2", "area": "11", "zona": "Trujillo", "codigo": "603", "tienda": "HERNAN DE JESUS", "ubicacion": "EL VIGÍA-  CARRETERA PANAMERICANA", "estado": "activa", "total": 118.2}, {"region": "2", "area": "11", "zona": "Trujillo", "codigo": "595", "tienda": "MARTA", "ubicacion": "SAN CRISTOBAL - BARRIO OBRERO", "estado": "ninguna", "total": 104.7}, {"region": "2", "area": "11", "zona": "Trujillo", "codigo": "330", "tienda": "ROXANA", "ubicacion": "MÉRIDA - NUEVA CALLE EL COBRE", "estado": "a_inactivar", "total": 115.3}, {"region": "2", "area": "11", "zona": "Trujillo", "codigo": "", "tienda": "ARBOLITO", "ubicacion": "SAN CRISTOBAL", "estado": "ninguna", "total": 118.2}, {"region": "2", "area": "11", "zona": "Trujillo", "codigo": "319", "tienda": "SALAS", "ubicacion": "CC EL RAMIRAL", "estado": "a_inactivar", "total": 113.8}, {"region": "2", "area": "11", "zona": "Trujillo", "codigo": "601", "tienda": "SIETE COLINAS", "ubicacion": "TRUJILLO- AV. BOLIVAR/CALLE 27", "estado": "a_inactivar", "total": 116.0}, {"region": "2", "area": "11", "zona": "Trujillo", "codigo": "608", "tienda": "LA PLATA", "ubicacion": "TRUJILLO -  URB. LA PLATA", "estado": "proxima", "total": 116.4}, {"region": "2", "area": "11", "zona": "Trujillo", "codigo": "594", "tienda": "SORAYA", "ubicacion": "SAN CRISTOBAL- C.C SAMBIL", "estado": "a_inactivar", "total": 109.6}, {"region": "2", "area": "11", "zona": "Trujillo", "codigo": "600", "tienda": "TRUJILLO", "ubicacion": "TRUJILLO - AV. 9 CON CALLE 9", "estado": "ninguna", "total": 120.6}, {"region": "3", "area": "12", "zona": "Barcelona", "codigo": "412", "tienda": "ARABELLA", "ubicacion": "BARCELONA - AV NUEVA ESPARTA", "estado": "activa", "total": 112.5}, {"region": "3", "area": "12", "zona": "Porlamar", "codigo": "416", "tienda": "DAVID", "ubicacion": "LECHERIA - CALLE MARINO", "estado": "ninguna", "total": 109.6}, {"region": "3", "area": "12", "zona": "Porlamar", "codigo": "411", "tienda": "LILIANA", "ubicacion": "PTO. LA CRUZ - PASEO COLON No 18", "estado": "ninguna", "total": 98.2}, {"region": "3", "area": "12", "zona": "Porlamar", "codigo": "427", "tienda": "LOS CEREZOS", "ubicacion": "PTO. LA CRUZ", "estado": "activa", "total": 102.5}, {"region": "3", "area": "12", "zona": "Porlamar", "codigo": "401", "tienda": "MARIAS", "ubicacion": "BARCELONA - URB. BOSQUE", "estado": "activa", "total": 102.1}, {"region": "3", "area": "12", "zona": "Porlamar", "codigo": "481", "tienda": "MILAGROS", "ubicacion": "PORLAMAR - C.C SAMBIL", "estado": "activa", "total": 109.3}, {"region": "3", "area": "12", "zona": "Porlamar", "codigo": "410", "tienda": "ODISEA", "ubicacion": "PUERTO LA CRUZ -  CALLE LA LIBERTAD", "estado": "ninguna", "total": 110.3}, {"region": "3", "area": "12", "zona": "Porlamar", "codigo": "482", "tienda": "LA VELA", "ubicacion": "PORLAMAR - CC LA VELA", "estado": "ninguna", "total": 112.9}, {"region": "3", "area": "12", "zona": "Porlamar", "codigo": "425", "tienda": "TUNANTAL", "ubicacion": "CUMANA - AV GRAN MARISCAL", "estado": "activa", "total": 106.6}, {"region": "3", "area": "12", "zona": "Porlamar", "codigo": "483", "tienda": "PAMPATAR", "ubicacion": "PAMPATAR- CALEE JOAQUIN MANEIRO", "estado": "ninguna", "total": 116.0}, {"region": "3", "area": "12", "zona": "Porlamar", "codigo": "484", "tienda": "LA ASUNCION", "ubicacion": "LA ASUNCIÓN- AV 31 DE JULIO", "estado": "proxima", "total": 116.0}, {"region": "3", "area": "12", "zona": "Porlamar", "codigo": "414", "tienda": "PLAYA LIDO", "ubicacion": "LECHERIA -  AV DIEGO BAUTISTA URBANEJA", "estado": "ninguna", "total": 111.9}, {"region": "3", "area": "12", "zona": "Porlamar", "codigo": "480", "tienda": "RESTINGA", "ubicacion": "PAMPATAR - URB PLAYA EL ANGEL", "estado": "a_inactivar", "total": 109.4}, {"region": "3", "area": "12", "zona": "Porlamar", "codigo": "400", "tienda": "SERRANIA", "ubicacion": "BARCELONA - C.C. NEVERI", "estado": "ninguna", "total": 116.3}, {"region": "3", "area": "13", "zona": "", "codigo": "426", "tienda": "CORAL", "ubicacion": "ANACO - AV JOSE ANTONIO ANZOATEGUI", "estado": "activa", "total": 112.5}, {"region": "3", "area": "13", "zona": "", "codigo": "420", "tienda": "KAVAC", "ubicacion": "ANACO - AV MIRANDA No 2-65", "estado": "a_inactivar", "total": 114.6}, {"region": "3", "area": "13", "zona": "", "codigo": "417", "tienda": "ANITA", "ubicacion": "MATURIN - QTA No 11 CARRERA 10", "estado": "proxima", "total": 115.3}, {"region": "3", "area": "13", "zona": "", "codigo": "440", "tienda": "MIRAMONTES", "ubicacion": "AVENIDA UNIVERSITARIA URB. MIRAMONTES", "estado": "activa", "total": 110.6}, {"region": "3", "area": "13", "zona": "", "codigo": "415", "tienda": "MARIANA", "ubicacion": "MATURIN - CALLE 13 CON CARRERA 9", "estado": "ninguna", "total": 112.8}, {"region": "3", "area": "13", "zona": "", "codigo": "428", "tienda": "ORINOCO", "ubicacion": "", "estado": "ninguna", "total": 121.5}, {"region": "3", "area": "13", "zona": "", "codigo": "424", "tienda": "PALMA REAL", "ubicacion": "MATURIN - AV. PRINCIPAL DE TIPURO", "estado": "activa", "total": 117.2}, {"region": "3", "area": "13", "zona": "", "codigo": "419", "tienda": "PEDREGAL", "ubicacion": "MATURIN -  PPAL BARRIO LAS BRISAS DEL AEROPUERTO", "estado": "a_inactivar", "total": 108.3}, {"region": "3", "area": "13", "zona": "", "codigo": "421", "tienda": "PORVENIR", "ubicacion": "PUNTA DE MATA", "estado": "activa", "total": 117.9}, {"region": "3", "area": "13", "zona": "", "codigo": "418", "tienda": "ROSARIO", "ubicacion": "MATURIN - AV. BOLÍVAR CON CALLE 10", "estado": "ninguna", "total": 114.1}, {"region": "3", "area": "13", "zona": "", "codigo": "413", "tienda": "ZONA INDUSTRIAL", "ubicacion": "MATURIN - ZONA INDUSTRIAL", "estado": "ninguna", "total": 105.6}, {"region": "3", "area": "14", "zona": "Puerto Ordaz", "codigo": "698", "tienda": "ACERO", "ubicacion": "PUERTO ORDAZ - CC. ORINOKIA LOCAL 2", "estado": "ninguna", "total": 110.3}, {"region": "3", "area": "14", "zona": "Upata", "codigo": "423", "tienda": "AGUAMARINA", "ubicacion": "EL TIGRE - CC EL ROBLE", "estado": "activa", "total": 103.8}, {"region": "3", "area": "14", "zona": "Upata", "codigo": "699", "tienda": "ALUMINIO", "ubicacion": "PUERTO ORDAZ - CC. ORINOKIA LOCAL PB", "estado": "ninguna", "total": 111.7}, {"region": "3", "area": "14", "zona": "Upata", "codigo": "422", "tienda": "CHAPARRAL", "ubicacion": "EL TIGRE - AV. WINSTON CHURCHILL", "estado": "a_inactivar", "total": 106.9}, {"region": "3", "area": "14", "zona": "Upata", "codigo": "704", "tienda": "ELIZABETH", "ubicacion": "UPATA -  AV. RAUL LEONI", "estado": "activa", "total": 116.0}, {"region": "3", "area": "14", "zona": "Upata", "codigo": "703", "tienda": "JADE", "ubicacion": "CIUDAD BOLÍVAR -AV 17 DE DICIEMBRE", "estado": "activa", "total": 114.9}, {"region": "3", "area": "14", "zona": "Upata", "codigo": "697", "tienda": "ORO", "ubicacion": "PUERTO ORDAZ - AV ATLANTICO", "estado": "activa", "total": 108.3}, {"region": "3", "area": "14", "zona": "Upata", "codigo": "701", "tienda": "PASEO CARONI", "ubicacion": "PUERTO ORDAZ - AV PASEO CARONI", "estado": "ninguna", "total": 107.2}, {"region": "3", "area": "14", "zona": "Upata", "codigo": "700", "tienda": "VILLA GRANADA", "ubicacion": "PUERTO ORDAZ - URB. VILLA GRANADA", "estado": "a_inactivar", "total": 107.8}, {"region": "3", "area": "14", "zona": "Upata", "codigo": "702", "tienda": "PIEDRA LUNA", "ubicacion": "PUERTO ORDAZ - AV ATLÁNTICO", "estado": "ninguna", "total": 116.5}, {"region": "1", "area": "15", "zona": "Caracas", "codigo": "170", "tienda": "ALTOZANO", "ubicacion": "SAN ANTONIO DE LOS ALTOS", "estado": "inactiva", "total": 106.1}, {"region": "1", "area": "15", "zona": "Altos Mirandinos", "codigo": "195", "tienda": "GRISELDA", "ubicacion": "SABANA GRANDE - CALLE REAL", "estado": "ninguna", "total": 98.9}, {"region": "1", "area": "15", "zona": "Altos Mirandinos", "codigo": "194", "tienda": "NATALIA", "ubicacion": "SABANA GRANDE - GRAN CAFÉ", "estado": "ninguna", "total": 105.6}, {"region": "1", "area": "15", "zona": "Altos Mirandinos", "codigo": "189", "tienda": "OPALO", "ubicacion": "SABANA GRANDE - CALLE EL RECREO", "estado": "ninguna", "total": 104.0}, {"region": "1", "area": "15", "zona": "Altos Mirandinos", "codigo": "171", "tienda": "SCARLET", "ubicacion": "LOS TEQUES - SECTOR LA MATICA", "estado": "activa", "total": 110.5}, {"region": "1", "area": "15", "zona": "Altos Mirandinos", "codigo": "167", "tienda": "DANILA", "ubicacion": "COCHE- CALLE ZEA", "estado": "ninguna", "total": 109.3}, {"region": "1", "area": "15", "zona": "Altos Mirandinos", "codigo": "168", "tienda": "LOS JARDINES DEL VALLE", "ubicacion": "EL VALLE", "estado": "inactiva", "total": 121.9}, {"region": "1", "area": "15", "zona": "Altos Mirandinos", "codigo": "117", "tienda": "MONJES", "ubicacion": "STA. MÓNICA", "estado": "ninguna", "total": 104.9}, {"region": "1", "area": "15", "zona": "Altos Mirandinos", "codigo": "135", "tienda": "RIOFARO", "ubicacion": "AV. ANDRÉS BELLO", "estado": "ninguna", "total": 107.9}, {"region": "1", "area": "15", "zona": "Altos Mirandinos", "codigo": "188", "tienda": "VENTUARI", "ubicacion": "PASEO LOS ILUSTRES", "estado": "ninguna", "total": 103.2}, {"region": "1", "area": "15", "zona": "Altos Mirandinos", "codigo": "128", "tienda": "ACONCAGUA", "ubicacion": "C.C. SANTE FE NIVEL 3", "estado": "ninguna", "total": 120.0}, {"region": "1", "area": "15", "zona": "Altos Mirandinos", "codigo": "147", "tienda": "MARFIL", "ubicacion": "BELLO MONTE", "estado": "activa", "total": 117.4}, {"region": "1", "area": "15", "zona": "Altos Mirandinos", "codigo": "114", "tienda": "SUSANA", "ubicacion": "C.C. CONCRESA", "estado": "ninguna", "total": 113.8}, {"region": "1", "area": "15", "zona": "Altos Mirandinos", "codigo": "120", "tienda": "ROMANA", "ubicacion": "C.C. MANZANARES PLAZA", "estado": "ninguna", "total": 109.3}, {"region": "1", "area": "16", "zona": "", "codigo": "680", "tienda": "ARENALES", "ubicacion": "CORO - AV INDEPENDENCIA", "estado": "activa", "total": 106.9}, {"region": "1", "area": "16", "zona": "", "codigo": "683", "tienda": "LAS SALINAS", "ubicacion": "PUNTO FIJO C.C. SAMBIL", "estado": "activa", "total": 114.1}, {"region": "1", "area": "16", "zona": "", "codigo": "681", "tienda": "CARIRUBANA", "ubicacion": "PUNTO FIJO CARIRUBANA - AV 6. URB ZARABON", "estado": "a_inactivar", "total": 114.2}, {"region": "1", "area": "16", "zona": "", "codigo": "591", "tienda": "MERCEDES", "ubicacion": "SAN FELIPE - AV LIBERTADOR CON CALLE 13", "estado": "a_inactivar", "total": 115.3}, {"region": "1", "area": "16", "zona": "", "codigo": "500", "tienda": "JUNIN", "ubicacion": "SAN FELIPE - AV. LIBERTADOR (5TA AVENIDA) CON CALLE 18.", "estado": "ninguna", "total": 115.0}, {"region": "1", "area": "16", "zona": "", "codigo": "501", "tienda": "PATRIA", "ubicacion": "SAN FELIPE - AV. LA PATRIA CON AV. 9", "estado": "ninguna", "total": 115.0}, {"region": "1", "area": "16", "zona": "", "codigo": "503", "tienda": "EL SAMAN", "ubicacion": "SAN FELIPE -  AV. ARTURO USLAR PIETRI", "estado": "activa", "total": 110.5}, {"region": "1", "area": "16", "zona": "", "codigo": "682", "tienda": "MANGLAR", "ubicacion": "TUCACAS", "estado": "activa", "total": 109.0}, {"region": "1", "area": "16", "zona": "", "codigo": "297", "tienda": "ESTRELLA MARINA", "ubicacion": "PUERTO CABELLO - URB. CUMBOTO NORTE", "estado": "activa", "total": 110.1}];
+const LABELS = {activa:'🟠 Activa',proxima:'🔵 Próximamente',a_inactivar:'🔴 A inactivar',inactiva:'⚫ Inactiva',ninguna:'No es FE'};
+const ACCION_LABEL = {confirmar:'Confirmada',activar:'Activar',inactivar:'Inactivar'};
+const AREA_ZONA = {'12':'Barcelona · Porlamar · Cumaná','13':'Porlamar · Anaco · Maturín','14':'Puerto Ordaz · Ciudad Bolívar · El Tigre','16':'Coro · Punto Fijo'};
+// Cifras oficiales del panel (indicadas por RRHH). 'Se van a inactivar' es subconjunto de 'Farmacia Escuela a hoy'.
+const PANEL = {totalAll:207, feHoy:83, aInactivar:26, quedaran:57, proxima:16, inactivas:6, confTotal:207};
+function zonasDeArea(a){
+  if(AREA_ZONA[a]) return AREA_ZONA[a].split(' · ');
+  return [...new Set(ORIGINAL.filter(d=>d.area===a&&d.zona).map(d=>d.zona))];
+}
+const ES_FE = e => e!=='ninguna';
+
+// revision = { [tienda]: {accion:'confirmar'|'inactivar'|null, comentario:string} }
+let revision = {};
+let filter='all', search='', areaFilter='all', tiendaFilter='all';
+function getRev(t){ return revision[t] || {accion:null,comentario:''}; }
+
+async function load(){
+  try{ const v=localStorage.getItem('fe_revision_vzla'); if(v) revision=JSON.parse(v); }catch(e){}
+  await cargarBase();
+  buildSelectors(); render();
+}
+async function cargarBase(){
+  try{
+    const resp=await fetch('base.xlsx',{cache:'no-store'});
+    if(!resp.ok) return;
+    const wb=XLSX.read(await resp.arrayBuffer(),{type:'array'});
+    const ws=wb.Sheets[wb.SheetNames[0]];
+    const rows=XLSX.utils.sheet_to_json(ws,{defval:''});
+    const MAP={'activa':'activa','proximamente':'proxima','próximamente':'proxima','a inactivar':'a_inactivar','inactiva':'inactiva','no es fe':'ninguna','':'ninguna'};
+    const norm=s=>(s===null||s===undefined)?'':s.toString().trim();
+    const parsed=rows.filter(r=>norm(r.TIENDA)).map(r=>{
+      const est=norm(r.ESTADO).toLowerCase();
+      const p=r.PROMEDIO; const tot=(norm(p)===''||isNaN(parseFloat(p)))?null:parseFloat(p);
+      return {region:norm(r.REGION),area:norm(r.AREA),zona:norm(r.ZONA),codigo:norm(r.CODIGO),
+              tienda:norm(r.TIENDA),ubicacion:norm(r.UBICACION),estado:MAP[est]||'ninguna',total:tot};
+    });
+    if(parsed.length) ORIGINAL=parsed;
+  }catch(e){ console.warn('No se pudo leer base.xlsx; usando datos embebidos.',e); }
+}
+function persist(flash){
+  try{ localStorage.setItem('fe_revision_vzla',JSON.stringify(revision));
+    if(flash!==false){const f=document.getElementById('flash');f.classList.add('show');setTimeout(()=>f.classList.remove('show'),1200);} }catch(e){console.error(e);}
+}
+function ensure(t){ if(!revision[t]) revision[t]={accion:null,comentario:''}; }
+function setAccion(t,a){ ensure(t); revision[t].accion=(revision[t].accion===a?null:a); persist(); render(); }
+function setComentario(t,v){ ensure(t); revision[t].comentario=v; persist(false); if(revision[t].accion==='activar') render(); }
+
+function buildSelectors(){
+  const areas=[...new Set(ORIGINAL.map(d=>d.area))].sort((a,b)=>(+a)-(+b));
+  const aSel=document.getElementById('areaSel');
+  aSel.innerHTML='<option value="all">Todas las áreas</option>'+areas.map(a=>{
+    const zs=zonasDeArea(a); const lbl=zs.length?` · ${zs.join(', ')}`:'';
+    return `<option value="${a}">Área ${a}${lbl}</option>`;}).join('');
+  const tSel=document.getElementById('tiendaSel');
+  let html='<option value="all">Todas las tiendas</option>';
+  areas.forEach(a=>{ const ts=ORIGINAL.filter(d=>d.area===a).map(d=>d.tienda).sort((x,y)=>x.localeCompare(y));
+    html+=`<optgroup label="Área ${a}">`+ts.map(t=>`<option value="${t.replace(/"/g,'&quot;')}">${t}</option>`).join('')+'</optgroup>';});
+  tSel.innerHTML=html;
+}
+
+function matchFilter(d){
+  const rev=getRev(d.tienda);
+  if(filter==='fe') return ES_FE(d.estado);
+  if(filter==='mayor100') return d.total!==null && d.total>=100;
+  if(filter==='menor100') return d.total!==null && d.total<100;
+  if(filter==='confirmada') return rev.accion==='confirmar';
+  if(filter==='pendiente') return ES_FE(d.estado) && !rev.accion;
+  if(filter!=='all') return d.estado===filter;
+  return true;
+}
+function matchArea(d){ return areaFilter==='all'||d.area===areaFilter; }
+function matchTienda(d){ return tiendaFilter==='all'||d.tienda===tiendaFilter; }
+function matchSearch(d){ if(!search)return true; const q=search.toLowerCase();
+  return d.tienda.toLowerCase().includes(q)||d.codigo.toLowerCase().includes(q)||(d.ubicacion||'').toLowerCase().includes(q); }
+
+function render(){
+  let cActiva=0,cProx=0,cAInact=0,cInact=0,cConf=0; const total=ORIGINAL.length;
+  ORIGINAL.forEach(d=>{ if(d.estado==='activa')cActiva++; else if(d.estado==='proxima')cProx++; else if(d.estado==='a_inactivar')cAInact++; else if(d.estado==='inactiva')cInact++; if(getRev(d.tienda).accion==='confirmar')cConf++; });
+  const feHoy=cActiva+cAInact, quedaran=cActiva, pct=total?Math.round(cConf/total*100):0;
+  document.getElementById('stats').innerHTML=
+    `<div class="stat dark"><div class="n">${total}</div><div class="l">Total farmacias a hoy</div></div>`
+    +`<div class="stat hero"><div class="n" style="color:var(--orange)">${feHoy}</div><div class="l"><span class="dot" style="background:var(--orange-line)"></span>Farmacia Escuela a hoy</div></div>`
+    +`<div class="stat"><div class="n" style="color:var(--rojo)">${cAInact}</div><div class="l"><span class="dot" style="background:var(--rojo-line)"></span>Se van a inactivar</div></div>`
+    +`<div class="stat"><div class="n" style="color:var(--green)">${quedaran}</div><div class="l"><span class="dot" style="background:var(--green)"></span>Quedarán activas</div></div>`
+    +`<div class="stat"><div class="n">${cProx}</div><div class="l"><span class="dot" style="background:var(--azul-line)"></span>Próximamente</div></div>`
+    +`<div class="stat"><div class="n">${cInact}</div><div class="l"><span class="dot" style="background:var(--gris-line)"></span>Inactivas</div></div>`
+    +`<div class="stat"><div class="n">${cConf}<span style="font-size:15px;color:var(--muted)"> / ${total}</span></div><div class="l"><span class="dot" style="background:var(--green)"></span>Confirmadas</div><div class="progress"><i style="width:${pct}%"></i></div></div>`;
+
+  const rows=ORIGINAL.filter(d=>matchFilter(d)&&matchArea(d)&&matchTienda(d)&&matchSearch(d));
+  const groups={}; rows.forEach(d=>{(groups[d.area]=groups[d.area]||[]).push(d);});
+  const orderedAreas=Object.keys(groups).sort((a,b)=>(+a)-(+b));
+  const list=document.getElementById('list');
+  if(rows.length===0){list.innerHTML='<div class="empty">No hay tiendas que coincidan con los filtros.</div>';return;}
+
+  list.innerHTML=orderedAreas.map(a=>{
+    const items=groups[a]; const zs=zonasDeArea(a);
+    const body=items.map(d=>{
+      const rev=getRev(d.tienda); const esc=d.tienda.replace(/'/g,"\\'");
+      let tcls='na',tval='—'; if(d.total!==null){tcls=d.total>=100?'green':'red';tval=d.total.toFixed(1)+'%';}
+      const acts=`<button class="act a-confirmar ${rev.accion==='confirmar'?'sel':''}" onclick="setAccion('${esc}','confirmar')">Confirmar</button>`+
+                 `<button class="act a-activar ${rev.accion==='activar'?'sel':''}" onclick="setAccion('${esc}','activar')">Activar</button>`+
+                 `<button class="act a-inactivar ${rev.accion==='inactivar'?'sel':''}" onclick="setAccion('${esc}','inactivar')">Inactivar</button>`;
+      const cval=(rev.comentario||'').replace(/"/g,'&quot;');
+      const rowCls=`row-${d.estado}`+(rev.accion==='confirmar'?' confirmada':rev.accion==='activar'?' marcada-activar':rev.accion==='inactivar'?' marcada-inact':'');
+      const needJust = rev.accion==='activar';
+      const comentCls = (needJust && !(rev.comentario||'').trim()) ? 'coment req' : 'coment';
+      const comentPh = needJust ? 'Justifica la activación (requerido)...' : 'Comentario...';
+      return `<tr class="${rowCls}">
+        <td><div class="t-name">${d.tienda}</div><div class="t-loc">${d.ubicacion||''}</div></td>
+        <td class="t-code hide-m">${d.codigo}</td>
+        <td><span class="pill p-${d.estado}"><span class="d"></span>${LABELS[d.estado]}</span></td>
+        <td class="hide-m"><span class="total ${tcls}">${tval}</span></td>
+        <td><div class="actions">${acts}</div></td>
+        <td><input class="${comentCls}" placeholder="${comentPh}" value="${cval}" onchange="setComentario('${esc}',this.value)"></td>
+      </tr>`;
+    }).join('');
+    return `<div class="area-group"><div class="area-head" onclick="this.parentElement.classList.toggle('closed')">
+        <h3>Área ${a}</h3><span class="zonas">${zs.join(' · ')}</span>
+        <span class="badge">${items.length} tienda${items.length!==1?'s':''}</span>
+        <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+      </div><div class="rows"><table>
+        <thead><tr><th>Tienda</th><th class="hide-m">Código</th><th>Estado actual</th><th class="hide-m">% Prom.</th><th>Acción</th><th>Comentarios</th></tr></thead>
+        <tbody>${body}</tbody></table></div></div>`;
+  }).join('');
+}
+
+document.getElementById('search').addEventListener('input',e=>{search=e.target.value;render();});
+document.getElementById('areaSel').addEventListener('change',e=>{areaFilter=e.target.value;render();});
+document.getElementById('tiendaSel').addEventListener('change',e=>{tiendaFilter=e.target.value;render();});
+document.getElementById('filters').addEventListener('click',e=>{
+  if(e.target.classList.contains('chip')){document.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));e.target.classList.add('on');filter=e.target.dataset.f;render();}});
+document.getElementById('reset').addEventListener('click',async()=>{
+  if(!confirm('¿Borrar TODA tu revisión (acciones y comentarios)? El estado de las tiendas no se modifica.'))return;
+  revision={}; await persist(); render();});
+document.getElementById('export').addEventListener('click',()=>{
+  const hdr='REGION,AREA,ZONA,CODIGO,TIENDA,UBICACION,ESTADO_ACTUAL,ACCION_RRHH,COMENTARIO_JUSTIFICACION\n';
+  const body=ORIGINAL.map(d=>{const r=getRev(d.tienda);
+    return `"${d.region}","${d.area}","${d.zona}","${d.codigo}","${d.tienda}","${(d.ubicacion||'').replace(/"/g,'')}","${LABELS[d.estado].replace(/[🟠🔵🔴⚫]/g,'').trim()}","${r.accion?ACCION_LABEL[r.accion]:''}","${(r.comentario||'').replace(/"/g,'')}"`;}).join('\n');
+  const blob=new Blob([hdr+body],{type:'text/csv;charset=utf-8'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='revision_farmacia_escuela_vzla.csv';a.click();});
+
+load();
+</script>
+</body>
+</html>

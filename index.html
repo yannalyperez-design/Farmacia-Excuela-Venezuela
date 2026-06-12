@@ -231,9 +231,18 @@ const collapsedAreas={};
 
 function keyOf(t){return t.pais+'|'+t.area+'|'+t.codigo+'|'+t.tienda;}
 function baseRows(){return DATA.filter(t=>paisActual==='Todos'?true:t.pais===paisActual);}
-function pctClass(v){if(v==null)return'na';if(v>=110)return'exc';if(v>=100)return'ok';if(v>=90)return'med';return'low';}
-function pctFmt(v){return v==null?'S/D':(Math.round(v*10)/10).toFixed(1)+'%';}
+function pctClass(v){if(v==null||isNaN(v))return'na';if(v>=110)return'exc';if(v>=100)return'ok';if(v>=90)return'med';return'low';}
+function pctFmt(v){return (v==null||isNaN(v))?'S/D':(Math.round(v*10)/10).toFixed(1)+'%';}
 function pctBadge(v){return `<span class="pct ${pctClass(v)}">${pctFmt(v)}</span>`;}
+function parsePct(v){
+  if(v===''||v==null)return null;
+  if(typeof v==='number')return isNaN(v)?null:v;
+  let s=String(v).replace('%','').replace(/\s/g,'').replace(',','.');
+  const n=parseFloat(s);
+  return isNaN(n)?null:n;
+}
+const EMBED_TOTAL={};
+DATA.forEach(t=>{EMBED_TOTAL[t.pais+'|'+t.codigo+'|'+t.tienda]=t.total;});
 
 /* ===== TOAST ===== */
 function toast(msg,kind){const t=document.getElementById('toast');t.textContent=msg;t.className='toast show '+(kind||'');setTimeout(()=>t.className='toast',2200);}
@@ -271,7 +280,7 @@ async function recargar(){
         tienda:String(r.TIENDA||'').trim(),
         ubicacion:String(r.UBICACION||''),
         estado:(LABEL2KEY[String(r.ESTADO||'').trim().toLowerCase()]||'ninguna'),
-        total:(r.PROMEDIO===''||r.PROMEDIO==null)?null:Number(r.PROMEDIO)
+        total:(function(){var p=parsePct(r.PROMEDIO);if(p==null){var e=EMBED_TOTAL[String(r.PAIS||'').trim()+'|'+String(r.CODIGO||'').trim()+'|'+String(r.TIENDA||'').trim()];p=(e===undefined?null:e);}return p;})()
       }));
       // overlay revision
       if(res.revision){res.revision.forEach(rv=>{

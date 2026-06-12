@@ -41,6 +41,8 @@
   .admin-box .badge-admin{background:var(--verde);color:#fff;font-weight:800;font-size:.78rem;padding:7px 14px;border-radius:20px;display:none}
   .admin-box.on .badge-admin{display:inline-block}
   .admin-box.on #btnAdmin{display:none}
+  .admin-box #btnExitAdmin{display:none}
+  .admin-box.on #btnExitAdmin{display:inline-flex}
   .btn{padding:10px 18px;border-radius:10px;border:none;font-weight:700;cursor:pointer;font-size:.88rem;display:inline-flex;align-items:center;gap:8px}
   .btn.nav{background:var(--navy);color:#fff} .btn.ghost{background:#fff;color:var(--navy);border:1.5px solid var(--line)}
   .btn.exp{background:var(--verde);color:#fff} .btn.warn{background:#B45309;color:#fff}
@@ -91,7 +93,7 @@
   .badge{display:inline-flex;align-items:center;gap:6px;padding:5px 13px;border-radius:30px;font-size:.75rem;font-weight:800;color:#fff;white-space:nowrap}
   .badge::before{content:'';width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.9)}
   .badge.activa{background:var(--naranja)} .badge.proxima{background:var(--azul)} .badge.inactiva{background:var(--gris)} .badge.a_inactivar{background:var(--rojo)}
-  .badge.ninguna{background:#E2E8F0;color:#475569} .badge.ninguna::before{background:#94A3B8}
+  .badge.ninguna{background:#CBD5E1;color:#334155} .badge.ninguna::before{background:#64748B}
   select.estado-sel{padding:7px 10px;border-radius:9px;border:1.5px solid var(--naranja);font-size:.82rem;font-weight:700;background:#FFFBEB;min-width:150px}
   .pct{display:inline-block;padding:5px 12px;border-radius:30px;font-size:.79rem;font-weight:800;color:#fff;min-width:60px;text-align:center}
   .pct.exc{background:#15803D}.pct.ok{background:#65A30D}.pct.med{background:#F59E0B}.pct.low{background:#DC2626}.pct.na{background:#E2E8F0;color:#64748B}
@@ -144,14 +146,18 @@
   </div>
 
   <div class="toprow">
-    <div class="country-tabs" id="countryTabs">
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+      <span style="font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--muted)">País:</span>
+      <div class="country-tabs" id="countryTabs">
       <button data-pais="Venezuela" class="active">🇻🇪 Venezuela</button>
       <button data-pais="Colombia">🇨🇴 Colombia</button>
       <button data-pais="Todos">🌎 Todos</button>
     </div>
+    </div>
     <div class="admin-box" id="adminBox">
       <span class="badge-admin">🔓 Modo administrador</span>
       <button class="btn ghost" id="btnAdmin" onclick="openAdmin()">🔑 Acceso administrador</button>
+      <button class="btn warn" id="btnExitAdmin" onclick="exitAdmin()">🔒 Salir de administrador</button>
       <button class="btn ghost" onclick="recargar()">↻ Recargar datos</button>
     </div>
   </div>
@@ -423,6 +429,13 @@ function confirmAdmin(){
   document.getElementById('adminBox').classList.add('on');
   closeAdmin();render();
   toast('Modo administrador activado','ok');
+}
+function exitAdmin(){
+  isAdmin=false;ADMIN_KEY_RUNTIME='';
+  document.getElementById('adminBox').classList.remove('on');
+  document.getElementById('adminKeyInput').value='';
+  render();
+  toast('Saliste del modo administrador','ok');
 }
 
 /* ===== DESCARGA POR VISTA ===== */

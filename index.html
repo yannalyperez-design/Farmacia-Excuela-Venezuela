@@ -253,7 +253,7 @@ function setConn(txt,color){document.getElementById('connStatus').innerHTML='●
 /* ===== JSONP (lectura y guardado sin CORS) ===== */
 function jsonp(params){
   return new Promise((resolve,reject)=>{
-    if(!API_URL || API_URL.indexOf('PEGA_AQUI')>=0){reject('API_URL no configurada');return;}
+    if(!API_URL || API_URL.indexOf('https://script.google.com/macros/s/AKfycbw7jzd3rK_OolRSQoX6EeQh65wOXKrg0rCqhDkCHU_pkAmAAjAEJ419xz-AngzxHjt0/exec')>=0){reject('API_URL no configurada');return;}
     const cb='cb_'+Math.random().toString(36).slice(2);
     params.callback=cb;
     const qs=Object.keys(params).map(k=>encodeURIComponent(k)+'='+encodeURIComponent(params[k])).join('&');
